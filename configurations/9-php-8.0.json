@@ -12,6 +12,7 @@
         "pdo_mysql",
         "pcre",
         "tokenizer",
-        "xml"
+        "xml",
+        "zip"
     ]
 }
