@@ -4,7 +4,7 @@ cd /var/www
 
 php artisan cache:clear
 
-php artisan migrate --froce
+php artisan migrate --force
 
 php artisan config:cache
 php artisan route:cache
