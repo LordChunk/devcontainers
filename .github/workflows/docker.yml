@@ -1,0 +1,55 @@
+name: 'Docker'
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  configurations:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v2
+
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+
+      - name: 'Load configurations'
+        id: configurations
+        working-directory: scripts
+        run: echo "::set-output name=matrix::$(php configurations.php)"
+
+  dockerfile:
+    needs: configurations
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        configuration: ${{ fromJson(needs.configurations.outputs.matrix) }}
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v2
+
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+
+      - name: 'Generate Dockerfile'
+        working-directory: scripts
+        run: php generate.php ${{ matrix.configuration }}
+
+      - name: 'Upload Dockerfile'
+        uses: actions/upload-artifact@v3
+        with:
+          name: Dockerfile.${{ matrix.configuration }}
+          path: Dockerfile
