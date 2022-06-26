@@ -7,4 +7,4 @@ foreach ($configurationFiles as $configurationFile) {
     $configurations[] = pathinfo($configurationFile, PATHINFO_FILENAME);
 }
 
-echo json_encode($configurations);
+echo json_encode(['configuration' => $configurations]);

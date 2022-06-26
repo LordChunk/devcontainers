@@ -31,9 +31,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    name: 'Dockerfile.${{ matrix.configuration }}'
+
     strategy:
-      matrix:
-        configuration: ${{ fromJson(needs.configurations.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.configurations.outputs.matrix) }}
 
     steps:
       - name: 'Checkout repository'
