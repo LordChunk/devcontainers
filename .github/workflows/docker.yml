@@ -9,8 +9,10 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  configurations:
+  matrix:
     runs-on: ubuntu-latest
+
+    name: 'Matrix'
 
     steps:
       - name: 'Checkout repository'
@@ -24,17 +26,21 @@ jobs:
       - name: 'Load configurations'
         id: configurations
         working-directory: scripts
-        run: echo "::set-output name=matrix::$(php configurations.php)"
+        run: echo "::set-output name=configurations::$(php configurations.php)"
+      
+    outputs:
+      configurations: ${{ steps.configurations.outputs.configurations }}
 
   dockerfile:
-    needs: configurations
+    needs: matrix
 
     runs-on: ubuntu-latest
 
     name: 'Dockerfile.${{ matrix.configuration }}'
 
     strategy:
-      matrix: ${{ fromJson(needs.configurations.outputs.matrix) }}
+      matrix: 
+        configuration: ${{ fromJson(needs.matrix.outputs.configurations) }}
 
     steps:
       - name: 'Checkout repository'
