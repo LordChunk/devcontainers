@@ -1,0 +1,17 @@
+{
+    "from": "php:8.0-fpm",
+    "extensions": [
+        "bcmath",
+        "ctype",
+        "curl",
+        "dom",
+        "fileinfo",
+        "json",
+        "mbstring",
+        "openssl",
+        "pdo_mysql",
+        "pcre",
+        "tokenizer",
+        "xml"
+    ]
+}
