@@ -69,18 +69,20 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: 'Extract Docker metadata'
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: sander0542/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=${{ matrix.configuration }}
 
       - name: 'Build and push Docker image'
         uses: docker/build-push-action@v3
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ matrix.configuration }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
