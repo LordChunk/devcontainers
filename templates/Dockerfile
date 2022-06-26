@@ -9,10 +9,10 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY config/supervisor.conf /etc/supervisord.conf
-COPY config/php.ini /usr/local/etc/php/conf.d/app.ini
-COPY config/nginx.conf /etc/nginx/sites-enabled/default
-COPY config/run.sh /bin/laravel.sh
+COPY files/supervisor.conf /etc/supervisord.conf
+COPY files/php.ini /usr/local/etc/php/conf.d/app.ini
+COPY files/nginx.conf /etc/nginx/sites-enabled/default
+COPY files/run.sh /bin/laravel.sh
 
 EXPOSE 80
 ENTRYPOINT [ "/bin/laravel.sh" ]
