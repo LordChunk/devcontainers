@@ -78,7 +78,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: sander0542/${{ env.IMAGE_NAME }}
+          images: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=${{ matrix.configuration }}
 
