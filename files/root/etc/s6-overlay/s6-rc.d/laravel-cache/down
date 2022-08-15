@@ -1,3 +1,3 @@
 #!/command/with-contenv sh
 
-exec php /var/www/artisan cache:clear
+php /var/www/artisan cache:clear
