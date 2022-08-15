@@ -22,14 +22,8 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY files/supervisor.conf /etc/supervisord.conf
-COPY files/run.sh /bin/laravel.sh
-
-RUN mkdir /var/log/laravel
-
-RUN chmod +x /bin/laravel.sh
 # Copy files
 COPY files/root/ /
 
 EXPOSE 80
-ENTRYPOINT [ "/bin/laravel.sh" ]
+ENTRYPOINT [ "/init" ]
