@@ -1,3 +1,3 @@
-#!/command/with-contenv sh
+#!/command/execlineb -P
 
-exec php /var/www/artisan queue:work --sleep=3 --tries=3
+php /var/www/artisan queue:work --sleep=3 --tries=3
