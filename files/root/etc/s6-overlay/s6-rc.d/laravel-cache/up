@@ -1,5 +1,5 @@
-#!/command/with-contenv bash
+#!/command/with-contenv sh
 
-php /var/www/artisan config:cache
-php /var/www/artisan route:cache
+php /var/www/artisan config:cache &&
+php /var/www/artisan route:cache &&
 php /var/www/artisan view:cache
