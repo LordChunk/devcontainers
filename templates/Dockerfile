@@ -2,7 +2,11 @@ FROM %FROM%
 
 WORKDIR /var/www
 
-RUN apt-get update && apt-get install -y git nginx xz-utils
+# NodeJS
+RUN curl -o- https://deb.nodesource.com/setup_16.x | bash
+
+# Dependencies
+RUN apt-get update && apt-get install -y git nginx xz-utils nodejs
 
 # S6 Overlay
 ARG OVERLAY_VERSION="v3.1.1.2"
