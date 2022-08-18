@@ -1,3 +1,5 @@
 #!/command/execlineb -P
 
-php /var/www/artisan queue:work --sleep=3 --tries=3
+cd /var/www
+
+php artisan queue:work --sleep=3 --tries=3
