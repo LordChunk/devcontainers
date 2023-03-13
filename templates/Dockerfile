@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y git nginx xz-utils nodejs
 
 # S6 Overlay
 ARG OVERLAY_VERSION="v3.1.1.2"
-ARG OVERLAY_ARCH="x86_64"
+ARG OVERLAY_ARCH="aarch64"
 
 ENV S6_KEEP_ENV=1
 ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=30000
