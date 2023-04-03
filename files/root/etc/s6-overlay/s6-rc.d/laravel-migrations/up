@@ -1,3 +1,0 @@
-#!/command/execlineb -P
-
-php /var/www/artisan migrate --force --no-interaction

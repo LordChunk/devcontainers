@@ -1,5 +1,0 @@
-#!/command/execlineb -P
-
-cd /var/www
-
-php artisan schedule:work
