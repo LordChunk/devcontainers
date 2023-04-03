@@ -84,7 +84,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/${{ env.LOWER_CASE_REPO_NAME }}
+          images: ${{ env.LOWER_CASE_REPO_NAME }}
           tags: |
             type=raw,value=${{ matrix.configuration }}
 
