@@ -1,5 +1,5 @@
 {
-    "base_image": "php:8-fpm",
+    "base_image": "8-bullseye",
     "extensions": [
         "bcmath",
         "ctype",
