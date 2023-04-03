@@ -6,9 +6,6 @@ on:
   push:
     branches: [ main ]
 
-env:
-  IMAGE_NAME: 'docker-laravel-arm64'
-
 jobs:
   matrix:
     runs-on: ubuntu-latest
@@ -50,7 +47,6 @@ jobs:
       - name: Store repo name and owner in lower case
         shell: bash
         run: echo "LOWER_CASE_REPO_NAME=$(echo ${GITHUB_REPOSITORY} | tr /A-Z/ /a-z/)" >> $GITHUB_ENV
-
 
       - name: 'Setup PHP'
         uses: shivammathur/setup-php@v2
