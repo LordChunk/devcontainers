@@ -13,5 +13,5 @@ ARG NODE_VERSION="lts/*"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
 # Preinstall Code Server for user 'vscode' to speed up first run
-# Script source: https://gist.github.com/b01/0a16b6645ab7921b0910603dfb85e4fb
-RUN su vscode -c "umask 0002 && curl -fsSL https://gist.githubusercontent.com/b01/0a16b6645ab7921b0910603dfb85e4fb/raw/f32b6371ed66085251c92bf98bfe9b7109c68e09/download-vs-code-server.sh | sh"
+COPY scripts/download-vs-code-server.sh /tmp/download-vs-code-server.sh
+RUN su vscode -c "/tmp/download-vs-code-server.sh"
