@@ -83,6 +83,9 @@ jobs:
           images: ${{ env.LOWER_CASE_REPO_NAME }}
           tags: |
             type=raw,value=${{ matrix.configuration }}
+      - run: |
+          pwd
+          ls -a
 
       - name: Build and push
         uses: docker/build-push-action@v4.0.0
