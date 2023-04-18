@@ -91,7 +91,6 @@ jobs:
         uses: docker/build-push-action@v4.0.0
         with:
           platforms: linux/arm64,linux/amd64
-          context: .
           # Only releases or pushes to development or main branch
           push: ${{ github.event_name != 'pull_request' }}
           tags: ghcr.io/${{ steps.meta.outputs.tags }}
