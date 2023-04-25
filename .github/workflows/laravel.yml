@@ -9,11 +9,11 @@ on:
       - 'laravel/**'
       - '.github/workflows/**'
 
+env:
+  WORKDIR: laravel
+
 jobs:
   matrix:
-    defaults:
-      run:
-        working-directory: laravel
     runs-on: ubuntu-latest
 
     name: 'Matrix'
@@ -29,7 +29,7 @@ jobs:
 
       - name: 'Load configurations'
         id: configurations
-        working-directory: laravel/scripts
+        working-directory: ${{ env.WORKDIR }}/scripts
         run: echo "::set-output name=configurations::$(php configurations.php)"
 
     outputs:
@@ -37,9 +37,6 @@ jobs:
 
   dockerfile:
     needs: matrix
-    defaults:
-      run:
-        working-directory: laravel
 
     runs-on: ubuntu-latest
 
@@ -63,17 +60,14 @@ jobs:
           php-version: 8.1
 
       - name: 'Generate Dockerfile'
-        working-directory: laravel/scripts
-        run: |
-          pwd
-          ls -la
-          php generate.php ${{ matrix.configuration }}
+        working-directory: ${{ env.WORKDIR }}/scripts
+        run: php generate.php ${{ matrix.configuration }}
 
       - name: 'Upload Dockerfile'
         uses: actions/upload-artifact@v3
         with:
           name: Dockerfile.${{ matrix.configuration }}
-          path: Dockerfile
+          path: laravel/Dockerfile.${{ matrix.configuration }}
 
       - name: 'Set up Docker QEMU'
         uses: docker/setup-qemu-action@v2
@@ -100,7 +94,7 @@ jobs:
         uses: docker/build-push-action@v4.0.0
         with:
           platforms: linux/arm64,linux/amd64
-          context: .
+          context: ${{ env.WORKDIR }}
           # Only releases or pushes to development or main branch
           push: ${{ github.event_name != 'pull_request' }}
           tags: ghcr.io/${{ steps.meta.outputs.tags }}
