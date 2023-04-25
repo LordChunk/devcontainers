@@ -25,7 +25,7 @@ jobs:
       - name: 'Load configurations'
         id: configurations
         working-directory: ${{ env.WORKDIR }}/scripts
-        run: echo "::set-output name=configurations::$(configurations.sh)"
+        run: echo "::set-output name=configurations::$(./configurations.sh)"
 
     outputs:
       configurations: ${{ steps.configurations.outputs.configurations }}
@@ -51,7 +51,7 @@ jobs:
 
       - name: 'Generate Dockerfile'
         working-directory: ${{ env.WORKDIR }}/scripts
-        run: generate.sh ${{ matrix.configuration }}
+        run: ./generate.sh ${{ matrix.configuration }}
 
       - name: 'Upload Dockerfile'
         uses: actions/upload-artifact@v3
