@@ -58,6 +58,7 @@ jobs:
         with:
           name: Dockerfile.${{ matrix.configuration }}
           path: ${{ env.WORKDIR }}/Dockerfile
+          if-no-files-found: error
 
       - name: 'Set up Docker QEMU'
         uses: docker/setup-qemu-action@v2
