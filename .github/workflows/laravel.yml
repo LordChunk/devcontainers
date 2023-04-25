@@ -7,7 +7,7 @@ on:
     branches: [ main ]
     paths:
       - 'laravel/**'
-      - '.github/workflows/'
+      - '.github/workflows/**'
 
 jobs:
   matrix:
