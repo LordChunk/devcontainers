@@ -67,7 +67,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Dockerfile.${{ matrix.configuration }}
-          path: laravel/Dockerfile.${{ matrix.configuration }}
+          path: ${{ env.WORKDIR }}/Dockerfile
 
       - name: 'Set up Docker QEMU'
         uses: docker/setup-qemu-action@v2
