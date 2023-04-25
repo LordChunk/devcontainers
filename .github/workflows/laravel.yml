@@ -5,9 +5,15 @@ on:
     - cron: "0 0 * * 0"
   push:
     branches: [ main ]
+    paths:
+      - 'laravel/**'
+      - '.github/workflows/'
 
 jobs:
   matrix:
+    defaults:
+      run:
+        working-directory: laravel
     runs-on: ubuntu-latest
 
     name: 'Matrix'
@@ -23,7 +29,7 @@ jobs:
 
       - name: 'Load configurations'
         id: configurations
-        working-directory: scripts
+        working-directory: laravel/scripts
         run: echo "::set-output name=configurations::$(php configurations.php)"
       
     outputs:
@@ -31,6 +37,9 @@ jobs:
 
   dockerfile:
     needs: matrix
+    defaults:
+      run:
+        working-directory: laravel
 
     runs-on: ubuntu-latest
 
@@ -54,7 +63,7 @@ jobs:
           php-version: 8.1
 
       - name: 'Generate Dockerfile'
-        working-directory: scripts
+        working-directory: laravel/scripts
         run: php generate.php ${{ matrix.configuration }}
 
       - name: 'Upload Dockerfile'
