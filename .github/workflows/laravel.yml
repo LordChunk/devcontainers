@@ -31,7 +31,7 @@ jobs:
         id: configurations
         working-directory: laravel/scripts
         run: echo "::set-output name=configurations::$(php configurations.php)"
-      
+
     outputs:
       configurations: ${{ steps.configurations.outputs.configurations }}
 
@@ -64,7 +64,10 @@ jobs:
 
       - name: 'Generate Dockerfile'
         working-directory: laravel/scripts
-        run: php generate.php ${{ matrix.configuration }}
+        run: |
+          pwd
+          ls -la
+          php generate.php ${{ matrix.configuration }}
 
       - name: 'Upload Dockerfile'
         uses: actions/upload-artifact@v3
