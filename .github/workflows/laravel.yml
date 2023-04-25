@@ -22,15 +22,10 @@ jobs:
       - name: 'Checkout repository'
         uses: actions/checkout@v3
 
-      - name: 'Setup PHP'
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-
       - name: 'Load configurations'
         id: configurations
         working-directory: ${{ env.WORKDIR }}/scripts
-        run: echo "::set-output name=configurations::$(php configurations.php)"
+        run: echo "::set-output name=configurations::$(configurations.sh)"
 
     outputs:
       configurations: ${{ steps.configurations.outputs.configurations }}
@@ -54,14 +49,9 @@ jobs:
         shell: bash
         run: echo "LOWER_CASE_REPO_NAME=$(echo ${GITHUB_REPOSITORY} | tr /A-Z/ /a-z/)" >> $GITHUB_ENV
 
-      - name: 'Setup PHP'
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-
       - name: 'Generate Dockerfile'
         working-directory: ${{ env.WORKDIR }}/scripts
-        run: php generate.php ${{ matrix.configuration }}
+        run: generate.sh ${{ matrix.configuration }}
 
       - name: 'Upload Dockerfile'
         uses: actions/upload-artifact@v3
