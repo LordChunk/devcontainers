@@ -12,9 +12,4 @@ dockerfile=$(cat "../templates/Dockerfile")
 dockerfile=${dockerfile//'%FROM%'/$from}
 dockerfile=${dockerfile//'%EXTENSIONS%'/$extensions}
 
-if [[ ! -d "../dockerfile" ]]
-then
-    mkdir -p "../dockerfile"
-fi
-
-echo "$dockerfile" > "../dockerfile/Dockerfile"
+echo "$dockerfile" > "../Dockerfile"
