@@ -1,4 +1,7 @@
-FROM mcr.microsoft.com/devcontainers/php:%FROM%
+ARG base_image
+ARG extensions
+
+FROM mcr.microsoft.com/devcontainers/php:${base_image}
 
 # Install MariaDB client
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -6,7 +9,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Install specified extensions
-RUN docker-php-ext-install %EXTENSIONS%
+RUN docker-php-ext-install ${EXTENSIONS}
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="lts/*"

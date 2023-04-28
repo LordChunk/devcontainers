@@ -2,14 +2,18 @@
 
 configuration="$1"
 configurationPath="../configurations/$configuration.json"
-json=$(jq -r '.' "$configurationPath")
-
-from=$(echo "$json" | jq -r '.base_image')
-extensions=$(echo "$json" | jq -r '.extensions | join(" ")')
+env_file=$(
+  jq -r 'to_entries |
+    map("\(.key)=\(.value |
+      if type == "array" then
+        join(" ")
+      else
+        tostring
+      end)") |
+    .[]' "$configurationPath"
+)
 
 dockerfile=$(cat "../templates/Dockerfile")
 
-dockerfile=${dockerfile//'%FROM%'/$from}
-dockerfile=${dockerfile//'%EXTENSIONS%'/$extensions}
-
-echo "$dockerfile" > "../Dockerfile"
+# Write env file to name of config
+echo "$env_file" > "../env."$configuration
