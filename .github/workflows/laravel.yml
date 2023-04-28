@@ -86,12 +86,13 @@ jobs:
         with:
           platforms: linux/arm64,linux/amd64
           context: ${{ env.WORKDIR }}
+          file: ${{ env.WORKDIR }}/templates/Dockerfile
           # Only releases or pushes to development or main branch
           push: ${{ github.event_name != 'pull_request' }}
           tags: ghcr.io/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Use env.${{ matrix.configuration }} as list
-          build-args: $( join(fromFile('env.'${{matrix.configuration}}), ' ') )
+          build-args: $( join(fromFile('env.${{matrix.configuration}}'), ' ') )
           # Use GitHub Actions cache
           cache-from: type=gha
           cache-to: type=gha,mode=max
