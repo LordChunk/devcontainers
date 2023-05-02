@@ -1,7 +1,7 @@
 ARG base_image
-ARG extensions
-
 FROM mcr.microsoft.com/devcontainers/php:${base_image}
+
+ARG extensions
 
 # Install MariaDB client
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
