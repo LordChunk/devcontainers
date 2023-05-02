@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: env.${{ matrix.configuration }}
-          path: ${{ env.WORKDIR }}
+          path: ${{ env.WORKDIR }}/env.${{ matrix.configuration }}
           if-no-files-found: error
 
       - name: 'Set up Docker QEMU'
@@ -84,7 +84,7 @@ jobs:
       - name: Read build-args file
         id: build-args
         run: |
-          echo "BUILD_ARGS=$(cat env.${{matrix.configuration}})" >> $GITHUB_ENV
+          echo "BUILD_ARGS=$(cat ${{env.WORKDIR}}/env.${{matrix.configuration}})" >> $GITHUB_ENV
           ls -la
           cat env.${{matrix.configuration}}
 
