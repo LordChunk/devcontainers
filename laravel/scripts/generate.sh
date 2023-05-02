@@ -8,7 +8,8 @@ env_file=$(
         join(" ")
       else
         tostring
-      end)")' "$configurationPath"
+      end),") |
+      .[]' "$configurationPath"
 )
 
 dockerfile=$(cat "../templates/Dockerfile")
