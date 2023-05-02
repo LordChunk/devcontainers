@@ -83,7 +83,10 @@ jobs:
       
       - name: Read build-args file
         id: build-args
-        run: echo "BUILD_ARGS=$(cat env.${{matrix.configuration}})" >> $GITHUB_ENV
+        run: |
+          echo "BUILD_ARGS=$(cat ${{env.WORKDIR}}/configurations/${{matrix.configuration}}).json" >> $GITHUB_ENV
+          echo "Build args: \n"
+          cat ${{env.WORKDIR}}/configurations/${{matrix.configuration}}).json
 
       - name: Build and push
         uses: docker/build-push-action@v4.0.0
@@ -96,8 +99,7 @@ jobs:
           tags: ghcr.io/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Use env.${{ matrix.configuration }} as list
-          build-args: |
-            ${{env.BUILD_ARGS}}
+          build-args: ${{ fromJson(env.BUILD_ARGS) }}
           # Use GitHub Actions cache
           cache-from: type=gha
           cache-to: type=gha,mode=max
