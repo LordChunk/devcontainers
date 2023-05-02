@@ -3,13 +3,13 @@
 configuration="$1"
 configurationPath="../configurations/$configuration.json"
 env_file=$(
-  jq -r 'to_entries |
+  jq -jr 'to_entries |
     map("\(.key)=\(.value |
       if type == "array" then
         join(" ")
       else
         tostring
-      end)") |
+      end) ") |
     .[]' "$configurationPath"
 )
 
