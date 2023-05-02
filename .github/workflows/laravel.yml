@@ -85,8 +85,8 @@ jobs:
         id: build-args
         run: |
           echo "BUILD_ARGS=$(cat ${{env.WORKDIR}}/env.${{matrix.configuration}})" >> $GITHUB_ENV
-          ls -la
-          cat ${{env.WORKDIR}}/env.${{matrix.configuration}}
+          echo "Build args"
+          echo ${{env.BUILD_ARGS}}
 
       - name: Build and push
         uses: docker/build-push-action@v4.0.0
@@ -99,7 +99,7 @@ jobs:
           tags: ghcr.io/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Use env.${{ matrix.configuration }} as list
-          build-args: >
+          build-args: |
             ${{ env.BUILD_ARGS }}
           # Use GitHub Actions cache
           cache-from: type=gha
