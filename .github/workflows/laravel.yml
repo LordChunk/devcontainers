@@ -86,7 +86,7 @@ jobs:
         run: |
           echo "BUILD_ARGS=$(cat ${{env.WORKDIR}}/env.${{matrix.configuration}})" >> $GITHUB_ENV
           ls -la
-          cat env.${{matrix.configuration}}
+          cat cat ${{env.WORKDIR}}/env.${{matrix.configuration}}
 
       - name: Build and push
         uses: docker/build-push-action@v4.0.0
