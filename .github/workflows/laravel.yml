@@ -86,7 +86,7 @@ jobs:
         run: echo "BUILD_ARGS=$(cat ${{env.WORKDIR}}/env.${{matrix.configuration}}.json)" >> $GITHUB_ENV
 
       - name: Echo build args env
-        run: echo ${{env.BUILD_ARGS}}
+        run: echo ${{fromJson(env.BUILD_ARGS)}}
 
       - name: Build and push
         uses: docker/build-push-action@v4.0.0
@@ -99,7 +99,8 @@ jobs:
           tags: ghcr.io/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Use env.${{ matrix.configuration }} as list
-          build-args: ${{ fromJson(env.BUILD_ARGS) }}
+          build-args: |
+            ${{ fromJson(env.BUILD_ARGS) }}
           # Use GitHub Actions cache
           cache-from: type=gha
           cache-to: type=gha,mode=max
