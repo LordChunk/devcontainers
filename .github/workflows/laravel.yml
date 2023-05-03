@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: env.${{ matrix.configuration }}
-          path: ${{ env.WORKDIR }}/env.${{ matrix.configuration }}
+          path: ${{ env.WORKDIR }}/env.${{ matrix.configuration }}.json
           if-no-files-found: error
 
       - name: 'Set up Docker QEMU'
