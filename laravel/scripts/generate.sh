@@ -10,7 +10,7 @@ env_file=$(
         | join(" ") else .value 
       end)
   ]
-  | join(" --build-arg ")' "$configurationPath"
+  | join(" \\n")' "$configurationPath"
 )
 
 dockerfile=$(cat "../templates/Dockerfile")
