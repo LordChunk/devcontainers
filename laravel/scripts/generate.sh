@@ -8,4 +8,4 @@ env_file=$(
 dockerfile=$(cat "../templates/Dockerfile")
 
 # Write env file to name of config
-echo "$env_file" > "../env."$configuration
+echo "$env_file" > "../env."$configuration.json

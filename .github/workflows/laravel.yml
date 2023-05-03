@@ -83,7 +83,7 @@ jobs:
 
       - name: Read build-args file
         id: build-args
-        run: echo "BUILD_ARGS=$(cat ${{env.WORKDIR}}/env.${{matrix.configuration}})" >> $GITHUB_ENV
+        run: echo "BUILD_ARGS=$(cat ${{env.WORKDIR}}/env.${{matrix.configuration}}.json)" >> $GITHUB_ENV
 
       - name: Echo build args env
         run: echo ${{env.BUILD_ARGS}}
