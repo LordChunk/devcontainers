@@ -80,7 +80,7 @@ jobs:
           images: ${{ env.LOWER_CASE_REPO_NAME }}
           tags: |
             type=raw,value=${{ matrix.configuration }}
-      
+
       - name: Read build-args file
         id: build-args
         run: echo "BUILD_ARGS=$(cat ${{env.WORKDIR}}/env.${{matrix.configuration}})" >> $GITHUB_ENV
@@ -97,8 +97,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           # Use env.${{ matrix.configuration }} as list
           build-args: |
-            base_image=0-8.0-bullseye
-            extensions=mysqli pdo pdo_mysql
+            ${{env.BUILD_ARGS}}
           # Use GitHub Actions cache
           cache-from: type=gha
           cache-to: type=gha,mode=max
