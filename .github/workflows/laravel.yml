@@ -96,7 +96,9 @@ jobs:
           tags: ghcr.io/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Use env.${{ matrix.configuration }} as list
-          build-args: '${{ env.BUILD_ARGS }}'
+          build-args: |
+            base_image=0-8.0-bullseye
+            extensions=mysqli pdo pdo_mysql
           # Use GitHub Actions cache
           cache-from: type=gha
           cache-to: type=gha,mode=max
