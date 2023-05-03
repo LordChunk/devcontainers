@@ -2,14 +2,7 @@
 configuration="$1"
 configurationPath="../configurations/$configuration.json"
 env_file=$(
-  jq -r 'to_entries |
-    map("\(.key)=\(.value |
-      if type == "array" then
-        join(" ")
-      else
-        tostring
-      end)") |
-      .[]' "$configurationPath"
+  jq 'to_entries | map(if .value | type == "array" then {key: .key, value: (.value | join(" "))} else . end) | from_entries' "$configurationPath"
 )
 
 dockerfile=$(cat "../templates/Dockerfile")
