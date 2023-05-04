@@ -6,14 +6,16 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - 'typescript/**'
       - 'scripts/**'
+      - '.github/workflows/docker-builder.yml'
+      - 'typescript/**'
       - '.github/workflows/typescript.yml'
   push:
     branches: [ main ]
     paths:
-      - 'typescript/**'
       - 'scripts/**'
+      - '.github/workflows/docker-builder.yml'
+      - 'typescript/**'
       - '.github/workflows/typescript.yml'
 
 jobs:

@@ -6,14 +6,16 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - 'laravel/**'
       - 'scripts/**'
+      - '.github/workflows/docker-builder.yml'
+      - 'laravel/**'
       - '.github/workflows/laravel.yml'
   push:
     branches: [ main ]
     paths:
-      - 'laravel/**'
       - 'scripts/**'
+      - '.github/workflows/docker-builder.yml'
+      - 'laravel/**'
       - '.github/workflows/laravel.yml'
 
 jobs:
