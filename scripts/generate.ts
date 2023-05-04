@@ -1,11 +1,12 @@
 // Get workdir from GitHub Actions environment
-const __dirname = Deno.env.get("WORKDIR");
+const workDir = Deno.env.get("WORKDIR");
+const outDir = new URL('..', import.meta.url, ).pathname;
 
 const config = Deno.args[0];
 const configPath = `/configurations/${config}.json`;
 
-const configFile = JSON.parse(await Deno.readTextFile(__dirname + configPath));
-const dockerFile = await Deno.readTextFile(`${__dirname}/templates/Dockerfile`);
+const configFile = JSON.parse(await Deno.readTextFile(workDir + configPath));
+const dockerFile = await Deno.readTextFile(`${workDir}/templates/Dockerfile`);
 
 const keys = Object.keys(configFile);
 // Append all values from the config file to ARGs matching the key
@@ -17,7 +18,7 @@ keys.forEach((key) => {
 
 
 // Write the new Dockerfile to the root directory
-await Deno.writeTextFile(`${__dirname}/Dockerfile.${config}`, newDockerFile);
+await Deno.writeTextFile(`${outDir}/Dockerfile.${config}`, newDockerFile);
 
 function parseValue(value: any): string {
   if (Array.isArray(value)) {
