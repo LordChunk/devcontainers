@@ -104,6 +104,7 @@ jobs:
         uses: docker/build-push-action@v4.0.0
         with:
           platforms: linux/arm64,linux/amd64
+          context: .
           file: Dockerfile.${{ matrix.configuration }}
           push: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
           tags: ghcr.io/${{ steps.meta.outputs.tags }}
