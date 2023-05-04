@@ -22,10 +22,15 @@ jobs:
       - name: 'Checkout repository'
         uses: actions/checkout@v3
 
+      - name: 'Set up Deno'
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
       - name: 'Load configurations'
         id: configurations
         working-directory: ${{ env.WORKDIR }}/scripts
-        run: echo "::set-output name=configurations::$(./configurations.sh)"
+        run: echo "configurations=$(deno run --allow-read ./configuration.ts)" >> $GITHUB_OUTPUT
 
     outputs:
       configurations: ${{ steps.configurations.outputs.configurations }}
@@ -49,7 +54,8 @@ jobs:
         shell: bash
         run: echo "LOWER_CASE_REPO_NAME=$(echo ${GITHUB_REPOSITORY} | tr /A-Z/ /a-z/)" >> $GITHUB_ENV
 
-      - uses: denoland/setup-deno@v1
+      - name: 'Set up Deno'
+        uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
 
