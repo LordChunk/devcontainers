@@ -2,6 +2,9 @@
 const workDir = Deno.env.get("WORKDIR");
 const repoRoot = new URL('..', import.meta.url, ).pathname;
 
+console.log(`Workdir: ${workDir}`);
+console.log(`Repo root: ${repoRoot}`);
+
 // Get all the files from ../configurations ending .json
 const files = [];
 for await (const file of Deno.readDir(`${repoRoot}/${workDir}/configurations`)) {
