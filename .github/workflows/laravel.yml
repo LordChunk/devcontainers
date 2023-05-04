@@ -37,9 +37,12 @@ jobs:
       - name: 'Load configurations'
         id: configurations
         run: |
-          echo "PWD"
-          echo pwd
           echo "configurations=$(deno run --allow-read --allow-env ./scripts/configuration.ts)" >> $GITHUB_OUTPUT
+          # Error if no configurations found
+          if [ -z "${configurations}" ]; then
+            echo "No configurations found"
+            exit 1
+          fi
 
     outputs:
       configurations: ${{ steps.configurations.outputs.configurations }}
