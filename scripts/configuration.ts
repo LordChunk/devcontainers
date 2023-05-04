@@ -1,5 +1,5 @@
 // Get workdir from GitHub Actions environment
-const __dirname = env.WORKDIR;
+const __dirname = Deno.env.get("WORKDIR");
 
 // Get all the files from ../configurations ending .json
 const files = [];

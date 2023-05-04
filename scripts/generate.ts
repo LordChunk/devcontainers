@@ -1,5 +1,5 @@
 // Get workdir from GitHub Actions environment
-const __dirname = env.WORKDIR;
+const __dirname = Deno.env.get("WORKDIR");
 
 const config = Deno.args[0];
 const configPath = `/configurations/${config}.json`;
