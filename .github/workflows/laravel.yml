@@ -49,15 +49,19 @@ jobs:
         shell: bash
         run: echo "LOWER_CASE_REPO_NAME=$(echo ${GITHUB_REPOSITORY} | tr /A-Z/ /a-z/)" >> $GITHUB_ENV
 
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
       - name: 'Generate Dockerfile'
         working-directory: ${{ env.WORKDIR }}/scripts
-        run: ./generate.sh ${{ matrix.configuration }}
+        run: deno run --allow-read --allow-write ./generate.ts ${{ matrix.configuration }}
 
-      - name: 'Upload Dockerfile arguments'
+      - name: 'Upload Dockerfile'
         uses: actions/upload-artifact@v3
         with:
-          name: env.${{ matrix.configuration }}
-          path: ${{ env.WORKDIR }}/env.${{ matrix.configuration }}
+          name: Dockerfile.${{ matrix.configuration }}
+          path: ${{ env.WORKDIR }}/Dockerfile.${{ matrix.configuration }}
           if-no-files-found: error
 
       - name: 'Set up Docker QEMU'
@@ -81,26 +85,16 @@ jobs:
           tags: |
             type=raw,value=${{ matrix.configuration }}
 
-      - name: Read build-args file
-        id: build-args
-        run: echo "BUILD_ARGS=$(cat ${{env.WORKDIR}}/env.${{matrix.configuration}})" >> $GITHUB_ENV
-
-      - name: Echo build args env
-        run: echo ${{env.BUILD_ARGS}}
-
       - name: Build and push
         uses: docker/build-push-action@v4.0.0
         with:
           platforms: linux/arm64,linux/amd64
           context: ${{ env.WORKDIR }}
-          file: ${{ env.WORKDIR }}/templates/Dockerfile
+          file: ${{ env.WORKDIR }}/Dockerfile.${{ matrix.configuration }}
           # Only releases or pushes to development or main branch
           push: ${{ github.event_name != 'pull_request' }}
           tags: ghcr.io/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          # Use env.${{ matrix.configuration }} as list
-          build-args: |
-            ${{ env.BUILD_ARGS }}
           # Use GitHub Actions cache
           cache-from: type=gha
           cache-to: type=gha,mode=max
