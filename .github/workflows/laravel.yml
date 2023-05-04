@@ -36,13 +36,11 @@ jobs:
 
       - name: 'Load configurations'
         id: configurations
-        run: |
-          echo "configurations=$(deno run --allow-read --allow-env ./scripts/configuration.ts)" >> $GITHUB_OUTPUT
-          # Error if no configurations found
-          if [ -z "${configurations}" ]; then
-            echo "No configurations found"
-            exit 1
-          fi
+        run: echo "configurations=$(deno run --allow-read --allow-env ./scripts/configuration.ts)" >> $GITHUB_OUTPUT
+
+      - name: 'Check configurations'
+        if: steps.configurations.outputs.configurations == ''
+        run: exit 1
 
     outputs:
       configurations: ${{ steps.configurations.outputs.configurations }}
