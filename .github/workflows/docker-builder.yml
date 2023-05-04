@@ -95,7 +95,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ inputs.IMAGE_NAME }}
+          images: lordchunk/${{ inputs.IMAGE_NAME }}
           tags: |
             type=raw,value=${{ matrix.configuration }}
 
