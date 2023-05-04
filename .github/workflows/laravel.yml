@@ -38,10 +38,10 @@ jobs:
         id: configurations
         run: >
           echo "configurations=$(
-            deno run
-              --allow-read
-              --allow-env
-              ./scripts/configuration.ts
+          deno run
+          --allow-read
+          --allow-env
+          ./scripts/configuration.ts
           )" >> $GITHUB_OUTPUT
 
       - name: 'Check configurations'
@@ -78,10 +78,10 @@ jobs:
       - name: 'Generate Dockerfile'
         run: > 
           deno run
-            --allow-read
-            --allow-write
-            --allow-env 
-            ./scripts/generate.ts ${{ matrix.configuration }}
+          --allow-read
+          --allow-write
+          --allow-env 
+          ./scripts/generate.ts ${{ matrix.configuration }}
 
       - name: 'Upload Dockerfile'
         uses: actions/upload-artifact@v3
