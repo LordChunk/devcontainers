@@ -3,11 +3,18 @@ name: 'Docker'
 on:
   schedule:
     - cron: "0 0 * * 0"
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'laravel/**'
+      - 'scripts/**'
+      - '.github/workflows/laravel.yml'
   push:
     branches: [ main ]
     paths:
       - 'laravel/**'
-      - '.github/workflows/**'
+      - 'scripts/**'
+      - '.github/workflows/laravel.yml'
 
 env:
   WORKDIR: laravel
@@ -29,8 +36,11 @@ jobs:
 
       - name: 'Load configurations'
         id: configurations
-        working-directory: ${{ env.WORKDIR }}/scripts
-        run: echo "configurations=$(deno run --allow-read ./configuration.ts)" >> $GITHUB_OUTPUT
+        working-directory: ${{ github.workspace }}/scripts
+        run: |
+          echo "PWD"
+          echo pwd
+          echo "configurations=$(deno run --allow-read ./configuration.ts)" >> $GITHUB_OUTPUT
 
     outputs:
       configurations: ${{ steps.configurations.outputs.configurations }}
@@ -60,7 +70,7 @@ jobs:
           deno-version: v1.x
 
       - name: 'Generate Dockerfile'
-        working-directory: ${{ env.WORKDIR }}/scripts
+        working-directory: ${{ github.workspace }}/scripts
         run: deno run --allow-read --allow-write ./generate.ts ${{ matrix.configuration }}
 
       - name: 'Upload Dockerfile'
@@ -97,8 +107,7 @@ jobs:
           platforms: linux/arm64,linux/amd64
           context: ${{ env.WORKDIR }}
           file: ${{ env.WORKDIR }}/Dockerfile.${{ matrix.configuration }}
-          # Only releases or pushes to development or main branch
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
           tags: ghcr.io/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Use GitHub Actions cache
