@@ -40,7 +40,7 @@ jobs:
         run: |
           echo "PWD"
           echo pwd
-          echo "configurations=$(deno run --allow-read ./configuration.ts)" >> $GITHUB_OUTPUT
+          echo "configurations=$(deno run --allow-read --allow-env ./configuration.ts)" >> $GITHUB_OUTPUT
 
     outputs:
       configurations: ${{ steps.configurations.outputs.configurations }}
@@ -71,7 +71,7 @@ jobs:
 
       - name: 'Generate Dockerfile'
         working-directory: ${{ github.workspace }}/scripts
-        run: deno run --allow-read --allow-write ./generate.ts ${{ matrix.configuration }}
+        run: deno run --allow-read --allow-write --allow-env ./generate.ts ${{ matrix.configuration }}
 
       - name: 'Upload Dockerfile'
         uses: actions/upload-artifact@v3
