@@ -96,7 +96,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.LOWER_CASE_REPO_NAME }}
+          images: ${{ inputs.IMAGE_NAME }}
           tags: |
             type=raw,value=${{ matrix.configuration }}
 
