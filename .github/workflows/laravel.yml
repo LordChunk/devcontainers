@@ -36,7 +36,13 @@ jobs:
 
       - name: 'Load configurations'
         id: configurations
-        run: echo "configurations=$(deno run --allow-read --allow-env ./scripts/configuration.ts)" >> $GITHUB_OUTPUT
+        run: >
+          echo "configurations=$(
+            deno run
+              --allow-read
+              --allow-env
+              ./scripts/configuration.ts
+          )" >> $GITHUB_OUTPUT
 
       - name: 'Check configurations'
         if: steps.configurations.outputs.configurations == ''
@@ -70,7 +76,12 @@ jobs:
           deno-version: v1.x
 
       - name: 'Generate Dockerfile'
-        run: deno run --allow-read --allow-write --allow-env ./scripts/generate.ts ${{ matrix.configuration }}
+        run: > 
+          deno run
+            --allow-read
+            --allow-write
+            --allow-env 
+            ./scripts/generate.ts ${{ matrix.configuration }}
 
       - name: 'Upload Dockerfile'
         uses: actions/upload-artifact@v3
