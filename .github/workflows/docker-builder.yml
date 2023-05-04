@@ -10,8 +10,6 @@ on:
         type: string
         required: true
 
-env:
-  WORKDIR: ${{ github.event.inputs.WORKDIR }}
 jobs:
   matrix:
     runs-on: ubuntu-latest
@@ -28,6 +26,8 @@ jobs:
           deno-version: v1.x
 
       - name: 'Load configurations'
+        env:
+          WORKDIR: ${{ github.event.inputs.WORKDIR }}
         id: configurations
         run: >
           echo "configurations=$(
@@ -65,6 +65,8 @@ jobs:
           deno-version: v1.x
 
       - name: 'Generate Dockerfile'
+        env:
+          WORKDIR: ${{ github.event.inputs.WORKDIR }}
         run: > 
           deno run
           --allow-read
