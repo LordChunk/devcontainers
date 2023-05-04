@@ -10,12 +10,13 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "github.vscode-github-actions",
-        "GitHub.copilot",
-        "ms-azuretools.vscode-docker",
-        "bmewburn.vscode-intelephense-client",
-        "eamodio.gitlens"
-      ]
+		"github.vscode-github-actions",
+		"GitHub.copilot",
+		"ms-azuretools.vscode-docker",
+		"bmewburn.vscode-intelephense-client",
+		"eamodio.gitlens",
+		"denoland.vscode-deno"
+	]
     }
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -24,7 +25,8 @@
   ],
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+	  "ghcr.io/devcontainers-contrib/features/deno:1": {}
   }
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
