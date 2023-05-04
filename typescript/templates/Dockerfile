@@ -1,5 +1,5 @@
 ARG base_image
-FROM mcr.microsoft.com/devcontainers/typescript-node:0-${base_image}
+FROM mcr.microsoft.com/devcontainers/typescript-node:${base_image}
 
 # Install Cypress dependencies
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
