@@ -1,6 +1,6 @@
 // Get workdir from GitHub Actions environment
 const workDir = Deno.env.get("WORKDIR");
-const outDir = new URL('..', import.meta.url, ).pathname;
+const repoRoot = new URL('..', import.meta.url, ).pathname;
 
 const config = Deno.args[0];
 const configPath = `/configurations/${config}.json`;
@@ -18,7 +18,7 @@ keys.forEach((key) => {
 
 
 // Write the new Dockerfile to the root directory
-await Deno.writeTextFile(`${outDir}/Dockerfile.${config}`, newDockerFile);
+await Deno.writeTextFile(`${repoRoot}/Dockerfile.${config}`, newDockerFile);
 
 function parseValue(value: any): string {
   if (Array.isArray(value)) {
