@@ -1,3 +1,4 @@
+throw new Error(`Debug error`);
 // Get workdir from GitHub Actions environment
 const __dirname = Deno.env.get("WORKDIR");
 
