@@ -1,4 +1,4 @@
-name: 'Laravel'
+name: 'Typescript'
 
 on:
   schedule:
@@ -8,19 +8,19 @@ on:
     paths:
       - 'scripts/**'
       - '.github/workflows/docker-builder.yml'
-      - 'laravel/**'
-      - '.github/workflows/laravel.yml'
+      - 'typescript/**'
+      - '.github/workflows/typescript.yml'
   push:
     branches: [ main ]
     paths:
       - 'scripts/**'
       - '.github/workflows/docker-builder.yml'
-      - 'laravel/**'
-      - '.github/workflows/laravel.yml'
+      - 'typescript/**'
+      - '.github/workflows/typescript.yml'
 
 jobs:
-  laravel-docker-builder:
+  typescript-docker-builder:
       uses: ./.github/workflows/docker-builder.yml
       with:
-        WORKDIR: laravel
-        IMAGE_NAME: devcontainer-laravel
+        WORKDIR: typescript
+        IMAGE_NAME: devcontainer-typescript
