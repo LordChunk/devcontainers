@@ -1,0 +1,26 @@
+name: 'Deno'
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'scripts/**'
+      - '.github/workflows/docker-builder.yml'
+      - 'deno/**'
+      - '.github/workflows/deno.yml'
+  push:
+    branches: [ main ]
+    paths:
+      - 'scripts/**'
+      - '.github/workflows/docker-builder.yml'
+      - 'deno/**'
+      - '.github/workflows/deno.yml'
+
+jobs:
+  deno-docker-builder:
+      uses: ./.github/workflows/docker-builder.yml
+      with:
+        WORKDIR: deno
+        IMAGE_NAME: devcontainer/deno

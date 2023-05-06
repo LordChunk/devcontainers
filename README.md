@@ -8,3 +8,4 @@ Currently, the following languages and frameworks are supported:
 
 - PHP/Laravel (PHP 8.x)
 - Node.js with TypeScript (Node.js 14 - 20)
+- Deno (Deno 1.31.3, 1.32.5, 1.33.2 & latest)
