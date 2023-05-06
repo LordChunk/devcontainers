@@ -23,4 +23,4 @@ jobs:
       uses: ./.github/workflows/docker-builder.yml
       with:
         WORKDIR: typescript
-        IMAGE_NAME: devcontainer-typescript
+        IMAGE_NAME: devcontainers/typescript

@@ -23,4 +23,4 @@ jobs:
       uses: ./.github/workflows/docker-builder.yml
       with:
         WORKDIR: deno
-        IMAGE_NAME: devcontainer/deno
+        IMAGE_NAME: devcontainers/deno
