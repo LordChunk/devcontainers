@@ -91,6 +91,14 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: 'Extract Docker metadata'
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: lordchunk/${{ inputs.IMAGE_NAME }}
+          tags: |
+            type=raw,value=${{ matrix.configuration }}
+
       - name: Build and push
         uses: docker/build-push-action@v4.0.0
         with:
@@ -98,7 +106,7 @@ jobs:
           context: .
           file: Dockerfile.${{ matrix.configuration }}
           push: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
-          tags: ghcr.io/lordchunk/${{ inputs.IMAGE_NAME }}:${{ matrix.configuration }}
+          tags: ghcr.io/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           # Use GitHub Actions cache
           cache-from: type=gha
