@@ -8,15 +8,15 @@ on:
     paths:
       - 'scripts/**'
       - '.github/workflows/docker-builder.yml'
-      - 'laravel/**'
-      - '.github/workflows/laravel.yml'
+      - 'deno/**'
+      - '.github/workflows/deno.yml'
   push:
     branches: [ main ]
     paths:
       - 'scripts/**'
       - '.github/workflows/docker-builder.yml'
-      - 'laravel/**'
-      - '.github/workflows/laravel.yml'
+      - 'deno/**'
+      - '.github/workflows/deno.yml'
 
 jobs:
   deno-docker-builder:
