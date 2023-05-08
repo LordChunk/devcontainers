@@ -3,6 +3,19 @@
     "extensions": [
         "mysqli",
         "pdo",
-        "pdo_mysql"
+        "pdo_mysql",
+        "mysql",
+        "curl",
+        "ctype",
+        "dom",
+        "fileinfo",
+        "filter",
+        "hash",
+        "mbstring",
+        "openssl",
+        "pcre",
+        "session",
+        "tokenizer",
+        "xml"
     ]
 }
