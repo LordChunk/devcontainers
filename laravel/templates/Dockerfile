@@ -5,7 +5,10 @@ ARG extensions
 
 # Install MariaDB client
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    # MariaDB Client
     && apt-get install -y mariadb-client \
+    # Cypress dependencies
+    libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Install specified extensions
