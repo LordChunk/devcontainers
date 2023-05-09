@@ -13,7 +13,7 @@ const keys = Object.keys(configFile);
 let newDockerFile = dockerFile;
 keys.forEach((key) => {
   const value = parseValue(configFile[key]);
-  newDockerFile = newDockerFile.replace(new RegExp(`ARG ${key}`), `ARG ${key}=${value}`);
+  newDockerFile = newDockerFile.replace(new RegExp(`ARG ${key}`), `ARG ${key}="${value}"`);
 });
 
 
