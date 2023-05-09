@@ -13,7 +13,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 # Install specified extensions
 RUN docker-php-ext-install ${extensions}
-RUN docker-php-ext-enable ${extensions}
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="lts/*"
