@@ -1,20 +1,9 @@
 {
     "base_image": "0-8-bullseye",
     "extensions": [
-        "ctype",
         "curl",
-        "dom",
-        "fileinfo",
-        "filter",
-        "hash",
-        "mbstring",
         "mysqli",
-        "openssl",
-        "pcre",
         "pdo",
-        "pdo_mysql",
-        "session",
-        "tokenizer",
-        "xml"
+        "pdo_mysql"
     ]
 }
