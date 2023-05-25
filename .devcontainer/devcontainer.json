@@ -3,11 +3,10 @@
 {
 	"name": "Chunk's Devcontainers",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"image": "ghcr.io/lordchunk/devcontainers/deno",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-		"ghcr.io/devcontainers/features/github-cli:1": {},
-		"ghcr.io/devcontainers-contrib/features/deno:1": {}
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
