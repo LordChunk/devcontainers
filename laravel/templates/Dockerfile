@@ -3,11 +3,12 @@ FROM mcr.microsoft.com/devcontainers/php:${base_image}
 
 ARG extensions
 
+# Add Yarn key to stop apt update failing
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg -o /usr/share/keyrings/yarn-keyring.asc \
+    && sed -i '1s;^deb;deb [signed-by=/usr/share/keyrings/yarn-keyring.asc];' /etc/apt/sources.list.d/yarn.list
+
 # Install MariaDB client
-RUN  export DEBIAN_FRONTEND=noninteractive \
-    # Add Yarn key to stop apt update failing
-    && sudo apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com \
-    && apt-get update \
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # MariaDB Client
     && apt-get install -y mariadb-client \
     # Cypress dependencies
