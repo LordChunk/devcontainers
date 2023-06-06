@@ -6,7 +6,7 @@ ARG extensions
 # Install MariaDB client
 RUN  export DEBIAN_FRONTEND=noninteractive \
     # Add Yarn key to stop apt update failing
-    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
+    && sudo apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com \
     && apt-get update \
     # MariaDB Client
     && apt-get install -y mariadb-client \
