@@ -4,7 +4,10 @@ FROM mcr.microsoft.com/devcontainers/php:${base_image}
 ARG extensions
 
 # Install MariaDB client
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+RUN  export DEBIAN_FRONTEND=noninteractive \
+    # Add Yarn key to stop apt update failing
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
+    && apt-get update \
     # MariaDB Client
     && apt-get install -y mariadb-client \
     # Cypress dependencies
