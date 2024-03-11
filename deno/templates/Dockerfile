@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:jammy
+FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 ARG deno_version
 RUN curl -fsSL https://deno.land/install.sh | sh -s ${deno_version}
