@@ -10,4 +10,4 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # We use 'node' instead of 'vscode' because the base image uses 'node' as the default user
 # https://github.com/devcontainers/images/blob/main/src/javascript-node/.devcontainer/Dockerfile#L10
 COPY scripts/install-vs-code-server.sh /tmp/install-vs-code-server.sh
-RUN su node -c "/tmp/install-vs-code-server.sh $(cat /tmp/arch)"
+RUN su node -c "/tmp/install-vs-code-server.sh linux"
