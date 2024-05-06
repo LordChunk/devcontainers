@@ -1,5 +1,5 @@
 {
-    "base_image": "0-8.3-bullseye",
+    "base_image": "1-8.0-bullseye",
     "extensions": [
         "curl",
         "mysqli",

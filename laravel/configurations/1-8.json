@@ -1,5 +1,5 @@
 {
-    "base_image": "0-8.2-bullseye",
+    "base_image": "1-8-bookworm",
     "extensions": [
         "curl",
         "mysqli",

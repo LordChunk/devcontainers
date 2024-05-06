@@ -1,3 +1,3 @@
 {
-    "base_image": "0-20-bullseye"
+    "base_image": "20-bookworm"
 }

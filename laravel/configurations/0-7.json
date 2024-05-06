@@ -1,9 +1,0 @@
-{
-    "base_image": "0-7-bullseye",
-    "extensions": [
-        "curl",
-        "mysqli",
-        "pdo",
-        "pdo_mysql"
-    ]
-}
