@@ -11,4 +11,6 @@ for await (const file of Deno.readDir(`${repoRoot}/${workDir}/configurations`)) 
   }
 }
 
+// Stringifying makes sure we print the JSON on one line. Multi-line seems to break the GitHub Actions output
+// As seen in this commit: https://github.com/LordChunk/devcontainers/commit/3928899f38ca5786510f36c98f08638c0cec56fc
 console.log(JSON.stringify(files));
