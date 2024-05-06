@@ -5,8 +5,9 @@
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "ghcr.io/lordchunk/devcontainers/deno",
 	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-		"ghcr.io/devcontainers/features/github-cli:1": {}
+		"ghcr.io/devcontainers-contrib/features/act-asdf:2": {},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+		"ghcr.io/devcontainers-contrib/features/deno-asdf:2": {}
 	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
@@ -28,7 +29,10 @@
         "bmewburn.vscode-intelephense-client",
         "eamodio.gitlens",
         "denoland.vscode-deno"
-      ]
+      ],
+			"settings": {
+				"deno.enable": true
+			}
     }
   }
 
