@@ -11,4 +11,4 @@ for await (const file of Deno.readDir(`${repoRoot}/${workDir}/configurations`)) 
   }
 }
 
-console.log(files);
+console.log(JSON.stringify(files));
