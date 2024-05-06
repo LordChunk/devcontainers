@@ -51,7 +51,8 @@ jobs:
     name: 'Dockerfile.${{ matrix.configuration }}'
 
     strategy:
-      matrix: 
+      fail-fast: false
+      matrix:
         configuration: ${{ fromJson(needs.matrix.outputs.configurations) }}
 
     steps:
