@@ -23,4 +23,4 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 
 # Preinstall Code Server for user 'vscode' to speed up first run
 COPY scripts/install-vs-code-server.sh /tmp/install-vs-code-server.sh
-RUN su vscode -c "/tmp/install-vs-code-server.sh"
+RUN su vscode -c "/tmp/install-vs-code-server.sh $(cat /tmp/arch)"
