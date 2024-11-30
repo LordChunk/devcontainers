@@ -4,6 +4,7 @@
         "curl",
         "mysqli",
         "pdo",
-        "pdo_mysql"
+        "pdo_mysql",
+        "sodium"
     ]
 }
