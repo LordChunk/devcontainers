@@ -1,0 +1,10 @@
+{
+  "base_image": "1-8.4-bookworm",
+  "extensions": [
+      "curl",
+      "mysqli",
+      "pdo",
+      "pdo_mysql",
+      "sodium"
+  ]
+}
