@@ -101,7 +101,7 @@ jobs:
             type=raw,value=${{ matrix.configuration }}
 
       - name: Build and push
-        uses: docker/build-push-action@v6.13.0
+        uses: docker/build-push-action@v6.14.0
         with:
           platforms: linux/arm64,linux/amd64
           context: .
