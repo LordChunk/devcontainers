@@ -5,15 +5,19 @@
 
 version: 2
 updates:
-  - package-ecosystem: "docker" # See documentation for possible values
+  - package-ecosystem: "docker"
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
-  - package-ecosystem: "github-actions" # See documentation for possible values
+      interval: weekly
+  - package-ecosystem: "github-actions"
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
+      interval: weekly
     groups:
       docker:
         patterns:
           - "docker/*"
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: weekly
